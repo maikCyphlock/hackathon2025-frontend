@@ -32,6 +32,8 @@ Para iniciar la aplicación en modo de desarrollo:
 ```bash
 npm start
 ```
+## disculpa por el codigo espagutti
+lo hice con prisas pero a este codigo le falta mucho refactor, en cuanto a los componentes, para quitar la sobrecarga de  `App.tsx`
 
 ## Contribuciones
 Las contribuciones son bienvenidas. Por favor, abre un issue o un pull request para discutir cualquier cambio que desees realizar.
