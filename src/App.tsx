@@ -470,9 +470,9 @@ function App() {
                           <Button >Alimentar</Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                          <DropdownMenuItem onClick={() => handlerFeedMutation('bg')}>Carne asada</DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => handlerFeedMutation('sm')}>lechugas</DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => handlerFeedMutation('md')}>arepas</DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handlerFeedMutation('bg')}>Carne asada 🥩</DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handlerFeedMutation('sm')}>lechugas 🥬</DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handlerFeedMutation('md')}>arepas 🫓</DropdownMenuItem>
 
                         </DropdownMenuContent>
                       </DropdownMenu>
@@ -498,9 +498,9 @@ function App() {
                               <Button disabled={!isConnected} >Jugar</Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
-                              <DropdownMenuItem onClick={() => handlerPlayMutation('ball')}>jugar con pelota</DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handlerPlayMutation('draw')}>dibujo</DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handlerPlayMutation('hide')}>escondidas</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlerPlayMutation('ball')}>jugar con pelota 🥎</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlerPlayMutation('draw')}>dibujo 📐</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlerPlayMutation('hide')}>escondidas 👻</DropdownMenuItem>
 
                             </DropdownMenuContent>
                           </DropdownMenu>
@@ -509,9 +509,9 @@ function App() {
                               <Button disabled={!isConnected} >Entrenar</Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
-                              <DropdownMenuItem onClick={() => handlerTrainMutation('lw')}>suave</DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handlerTrainMutation('md')}>medio</DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handlerTrainMutation('st')}>intenso</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlerTrainMutation('lw')}>suave 😇</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlerTrainMutation('md')}>medio 😌</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlerTrainMutation('st')}>intenso 🥵</DropdownMenuItem>
 
                             </DropdownMenuContent>
                           </DropdownMenu>
