@@ -49,10 +49,6 @@ function App() {
   const [isConnected, setIsConnected] = useState(true)
 
 
-  const handleClick = () => {
-
-  };
-
   const handlerConnection = async () => {
     try {
       await axios.get<Pet>(`${API_URL}${CREATE_URL}`);
@@ -421,9 +417,11 @@ function App() {
           {
             pet && pet.health > 0 ? (
               isResting ? (
-                <img className='object-fit w-64 rounded-2xl' src="sleeping.gif" alt="Sleeping Cat" />
+          <img className='object-fit w-64 rounded-2xl' src="sleeping.gif" alt="Sleeping Cat" />
+              ) : pet.mood > 80 && pet.hunger > 60 ? (
+          <img className='object-fit w-64 rounded-2xl' src="happy.gif" alt="Happy Cat" />
               ) : (
-                <img className='object-fit w-64 rounded-2xl' src="gato.gif" alt="Cat" />
+          <img className='object-fit w-64 rounded-2xl' src="gato.gif" alt="Cat" />
               )
             ) : (
               <img className='object-fit w-64 rounded-2xl' src="dead.gif" alt="Dead Cat" />
@@ -432,11 +430,11 @@ function App() {
           <section className='flex flex-col gap-4'>
             {
               !isOnline ? (
-                <>
-                  <div>
-                    <h1>no tienes conexión a internet</h1>
-                  </div>
-                </>
+          <>
+            <div>
+              <h1>no tienes conexión a internet</h1>
+            </div>
+          </>
               ) : null
             }
             <PetsStats pet={pet} />

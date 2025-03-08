@@ -21,8 +21,7 @@ function App ({
         <div id="stats">
             <h1>Nombre: {pet?.pet_name} </h1>
             <h1 className={pet?.health < 3 ? 'text-red-400' : 'text-green-400'}>Salud: {pet?.health} </h1>
-            <h1>Ánimo:  {pet?.mood}</h1>
-            <h1 className={pet?.hunger < 30 ? 'text-red-400' : 'text-green-400'}>Hambre: {pet?.hunger}</h1>
+            <h1 className={pet?.mood > 80 ? 'text-green-400' : 'text-yellow-400'}>Ánimo: {pet?.mood} {pet?.mood > 80 && pet?.hunger >60 ? '😊' : ''}</h1>    <h1 className={pet?.hunger < 30 ? 'text-red-400' : 'text-green-400'}>Hambre: {pet?.hunger}</h1>
             <h1>Energía: {pet?.physical}</h1>
           </div>
      )
