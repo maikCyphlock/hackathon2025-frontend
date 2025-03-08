@@ -25,6 +25,8 @@ const SCOLD_URL = '/pet/scold'
 const REST_URL = '/pet/rest'
 
 interface Pet {
+  pet_name: string;
+  result: any
   name: string; // Nombre de la mascota
   health: number; // Representa el estado de vida de la mascota (inicia en 5)
   mood: number; // Estado de ánimo de la mascota
@@ -415,7 +417,7 @@ function App() {
       <main className='flex flex-col gap-8 items-center justify-center'>
         <section className='flex flex-col md:flex-row  items-center justify-center gap-4'>
             {
-            pet?.health > 0 ? (
+            pet && pet.health > 0 ? (
               isResting ? (
               <img className='object-fit w-64 rounded-2xl' src="sleeping.gif" alt="Sleeping Cat" />
               ) : (
