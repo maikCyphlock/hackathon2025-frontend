@@ -1,0 +1,1 @@
+si estoy dispuesto a realizar pasantias
