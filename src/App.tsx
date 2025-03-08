@@ -179,12 +179,12 @@ function App() {
   });
  
   const { mutate: handlerPlayMutation } = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (playWith: 'ball' | 'hide' | 'draw') => {
       const { data: playData } = await axios.post<Pet>(
         `${API_URL}${PLAY_URL}`, {
         name: pet?.pet_name,
         mood: pet?.mood,
-        play_with: 'ball',
+        play_with: playWith,
         hunger: pet?.hunger
       },
         {
@@ -492,7 +492,18 @@ function App() {
                       </Dialog>
                       {
                         isOnline ? (<>
-                          <Button disabled={!isConnected} onClick={() => handlerPlayMutation()}>Jugar</Button>
+                         <DropdownMenu>
+                     <DropdownMenuTrigger asChild>
+                     <Button disabled={!isConnected} >Jugar</Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => handlerPlayMutation('ball')}>jugar con pelota</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handlerPlayMutation('draw')}>dibujo</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handlerPlayMutation('hide')}>escondidas</DropdownMenuItem>
+                      
+                        </DropdownMenuContent> 
+                     </DropdownMenu>
+          
                           <Button disabled={!isConnected} onClick={() => handlerTrainMutation()}>Entrenar</Button>
                         </>) : null
                       }
