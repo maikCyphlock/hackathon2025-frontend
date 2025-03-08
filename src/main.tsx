@@ -20,6 +20,6 @@ createRoot(document.getElementById('root')!).render(
 
     </QueryClientProvider>
 
-    <Toaster richColors />
+    <Toaster richColors position="top-center" />
   </StrictMode>,
 )
