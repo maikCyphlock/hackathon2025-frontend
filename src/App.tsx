@@ -14,6 +14,7 @@ import axios from 'axios'
 import { DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import PetsStats from './components/PetsStats';
 import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './components/ui/dropdown-menu'
 
 const API_URL = 'https://cors-anywhere.herokuapp.com/https://hackaton.corpoeureka.net'
 const FEED_URL = '/pet/feed'
@@ -317,11 +318,11 @@ function App() {
   }, [pet]);
 
   const { mutate: handlerFeedMutation } = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (foodValue: 'bg' | 'md' | 'sm') => {
       const { data: feedData } = await axios.post<Pet>(
         `${API_URL}${FEED_URL}`, {
         name: pet?.pet_name,
-        food_value: 'md',
+        food_value: foodValue,
         mood: pet?.mood
       },
         {
@@ -462,7 +463,19 @@ function App() {
                 <Button className='col-span-3' onClick={handleSubmit}>Crear</Button>
                 {
                   !isDead ? (
-                    <><Button onClick={() => handlerFeedMutation()}>Alimentar</Button>
+                    <>
+                     <DropdownMenu>
+                     <DropdownMenuTrigger asChild>
+                     <Button >Alimentar</Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => handlerFeedMutation('bg')}>Carne asada</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handlerFeedMutation('sm')}>lechugas</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handlerFeedMutation('md')}>arepas</DropdownMenuItem>
+                      
+                        </DropdownMenuContent> 
+                     </DropdownMenu>
+                   
                       <Button onClick={() => handlerPettingMutation()}>Acariciar</Button>
                       <Button onClick={() => handlerScoldMutation() }>Regañar</Button>
                       <Dialog>
