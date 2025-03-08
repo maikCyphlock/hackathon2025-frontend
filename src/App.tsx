@@ -50,7 +50,7 @@ function App() {
 
 
   const handleClick = () => {
-    
+
   };
 
   const handlerConnection = async () => {
@@ -134,14 +134,14 @@ function App() {
         toast.success(scoldData.result.msj);
       }
     },
-    onError: (error) =>{
+    onError: (error) => {
       console.error('Error scolding pet:', error);
       toast.error('Error al regañar la mascota');
     }
 
   })
 
-  
+
   const { mutate: handlerPettingMutation } = useMutation({
     mutationFn: async () => {
       const { data: pettingData } = await axios.post<Pet>(
@@ -177,7 +177,7 @@ function App() {
       toast.error('Error al acariciar la mascota');
     }
   });
- 
+
   const { mutate: handlerPlayMutation } = useMutation({
     mutationFn: async (playWith: 'ball' | 'hide' | 'draw') => {
       const { data: playData } = await axios.post<Pet>(
@@ -221,11 +221,12 @@ function App() {
     }
   });
   const { mutate: handlerTrainMutation } = useMutation({
-    mutationFn: async () => {
+    // 'train_tier': Selection ['lw','md','st'],
+    mutationFn: async (trainTier: 'lw' | 'md' | 'st') => {
       const { data: TrainData } = await axios.post<Pet>(
         `${API_URL}${TRAIN_URL}`, {
         name: pet?.pet_name,
-        train_tier: 'lw',
+        train_tier: trainTier,
         mood: pet?.mood,
         hunger: pet?.hunger
       },
@@ -402,7 +403,7 @@ function App() {
 
   return (
     <>
-    <Fireworks autorun={{ duration: 3, speed: 1 }}  />
+      <Fireworks autorun={{ duration: 3, speed: 1 }} />
       {
         <Dialog open={!isConnected}>
 
@@ -417,17 +418,17 @@ function App() {
       }
       <main className='flex flex-col gap-8 items-center justify-center'>
         <section className='flex flex-col md:flex-row  items-center justify-center gap-4'>
-            {
+          {
             pet && pet.health > 0 ? (
               isResting ? (
-              <img className='object-fit w-64 rounded-2xl' src="sleeping.gif" alt="Sleeping Cat" />
+                <img className='object-fit w-64 rounded-2xl' src="sleeping.gif" alt="Sleeping Cat" />
               ) : (
-              <img className='object-fit w-64 rounded-2xl' src="gato.gif" alt="Cat" />
+                <img className='object-fit w-64 rounded-2xl' src="gato.gif" alt="Cat" />
               )
             ) : (
               <img className='object-fit w-64 rounded-2xl' src="dead.gif" alt="Dead Cat" />
             )
-            }
+          }
           <section className='flex flex-col gap-4'>
             {
               !isOnline ? (
@@ -464,20 +465,20 @@ function App() {
                 {
                   !isDead ? (
                     <>
-                     <DropdownMenu>
-                     <DropdownMenuTrigger asChild>
-                     <Button >Alimentar</Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                      <DropdownMenuItem onClick={() => handlerFeedMutation('bg')}>Carne asada</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handlerFeedMutation('sm')}>lechugas</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handlerFeedMutation('md')}>arepas</DropdownMenuItem>
-                      
-                        </DropdownMenuContent> 
-                     </DropdownMenu>
-                   
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button >Alimentar</Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuItem onClick={() => handlerFeedMutation('bg')}>Carne asada</DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handlerFeedMutation('sm')}>lechugas</DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handlerFeedMutation('md')}>arepas</DropdownMenuItem>
+
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+
                       <Button onClick={() => handlerPettingMutation()}>Acariciar</Button>
-                      <Button onClick={() => handlerScoldMutation() }>Regañar</Button>
+                      <Button onClick={() => handlerScoldMutation()}>Regañar</Button>
                       <Dialog>
                         <DialogTrigger>
                           <Button>Descansar</Button>
@@ -492,19 +493,29 @@ function App() {
                       </Dialog>
                       {
                         isOnline ? (<>
-                         <DropdownMenu>
-                     <DropdownMenuTrigger asChild>
-                     <Button disabled={!isConnected} >Jugar</Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                      <DropdownMenuItem onClick={() => handlerPlayMutation('ball')}>jugar con pelota</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handlerPlayMutation('draw')}>dibujo</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handlerPlayMutation('hide')}>escondidas</DropdownMenuItem>
-                      
-                        </DropdownMenuContent> 
-                     </DropdownMenu>
-          
-                          <Button disabled={!isConnected} onClick={() => handlerTrainMutation()}>Entrenar</Button>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button disabled={!isConnected} >Jugar</Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              <DropdownMenuItem onClick={() => handlerPlayMutation('ball')}>jugar con pelota</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlerPlayMutation('draw')}>dibujo</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlerPlayMutation('hide')}>escondidas</DropdownMenuItem>
+
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button disabled={!isConnected} >Entrenar</Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              <DropdownMenuItem onClick={() => handlerTrainMutation('lw')}>suave</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlerTrainMutation('md')}>medio</DropdownMenuItem>
+                              <DropdownMenuItem onClick={() => handlerTrainMutation('st')}>intenso</DropdownMenuItem>
+
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        
                         </>) : null
                       }
 
